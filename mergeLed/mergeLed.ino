@@ -57,14 +57,14 @@ void loop() {
   // put your main code here, to run repeatedly:
   setLed();
   static unsigned long timer = millis();
-  char val = Serial.read();
+  byte val = Serial.read();
   if (val== '1') {
     myDFPlayer.play(3);
     //timer = millis();
     //myDFPlayer.next();  //Play next mp3 every 3 second.
   }
   if (val== '0') {
-    myDFPlayer.play(2);
+    myDFPlayer.play(4);
     //timer = millis();
     //myDFPlayer.next();  //Play next mp3 every 3 second.
   }
@@ -78,15 +78,19 @@ void loop() {
     val = BT.read();
     Serial.println(val);
     timer = millis();
-    myDFPlayer.play(3);
-    if (val == '1') {
+    //myDFPlayer.play(3);
+    if (val > 50 && totalSound<400) {
       Serial.println(val);
-      BT.println("LED ON");
+      totalSound+=val;
+      Serial.println(totalSound);
       myDFPlayer.play(3);
     } else if (val == '0') {
       digitalWrite(A3, LOW);
       // 回應命令發送端，告知「已關燈」
       BT.println("LED OFF");
+    }
+    if(totalSound>400){
+    myDFPlayer.play(4);
     }
   }
   

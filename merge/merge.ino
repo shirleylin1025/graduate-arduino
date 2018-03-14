@@ -78,7 +78,7 @@ void loop() {
     //Serial.println(val);
     if(soundValue>50 && storeLed == true){
     Serial.println(soundValue);
-    BT.print(1);
+    BT.print(soundValue);
     }
   }
 
