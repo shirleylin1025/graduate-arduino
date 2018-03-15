@@ -9,20 +9,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,20 +71,19 @@ public class MainActivity extends AppCompatActivity {
     // used in bluetooth handler to identify message status
     private  String _recieveData = "";
 
+    private VideoView videoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*VideoView videoView = (VideoView) this.findViewById(R.id.myVideo);
+        videoView = (VideoView) this.findViewById(R.id.myVideo);
         MediaController mc = new MediaController(this);
         videoView.setMediaController(mc);
 
         videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.hebe));
 
-
-        videoView.requestFocus();
-        //videoView.start();*/
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);
@@ -121,6 +125,13 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     mReadBuffer.setText(_recieveData); //將收到的字串呈現在畫面上
+                    mReadBuffer.setTextColor(Color.RED);
+                    if(_recieveData.equals("11")){
+                        Log.e("here","yes!");
+                        videoView.requestFocus();
+                        videoView.start();
+                    }
+
 
                 }
 
@@ -285,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener mDeviceClickListener = new
             AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
-                    
+
                     if(!mBTAdapter.isEnabled()) {
                         Toast.makeText(getBaseContext(), "Bluetooth not on",
                                        Toast.LENGTH_SHORT).show();
