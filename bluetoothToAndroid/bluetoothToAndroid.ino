@@ -12,6 +12,12 @@ void setup()
   
 void loop()  
 {  
+
+  if (Serial.available()) {
+    val = Serial.read();
+    BT.print(val);
+  }
+  
   while(BT.available()) //如果有收到資料  
   {  
     startRecieve = true;  
@@ -19,13 +25,14 @@ void loop()
     recieveData += val; //字元組成字串  
     BT.write(byte(val)); //把每次收到的字元轉成byte封包傳至手機端  
     delay(200);  //每次傳輸間隔，如果太短會造成資料遺失或亂碼  
-  }  
+  }
+
     
   if(startRecieve)  
   {  
-  startRecieve = false;  
-  Serial.println(recieveData); //呈現收到字串  
-  recieveData = "";  
+    startRecieve = false;  
+    Serial.println(recieveData); //呈現收到字串  
+    recieveData = "";  
   }  
     delay(300);  
 }  
