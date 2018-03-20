@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     mReadBuffer.setText(_recieveData); //將收到的字串呈現在畫面上
                     mReadBuffer.setTextColor(Color.RED);
-                    if(_recieveData.equals("Y")){
+                    if(readMessage.equals("Y")){
                         mRelativeLayout.setVisibility(View.GONE);
                         mVideoView.setVisibility(View.VISIBLE);
                         mVideoView.start();
@@ -142,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
                     mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
-                            Log.e("videoo","end");
+                            mRelativeLayout.setVisibility(View.VISIBLE);
+                            mVideoView.setVisibility(View.GONE);
                         }
                     });
                 }
