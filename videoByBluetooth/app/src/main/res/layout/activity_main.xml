@@ -3,35 +3,41 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="lin.shirley.videobybluetooth.MainActivity">
 
-    <VideoView
-        android:id="@+id/myVideo"
-        android:layout_width="match_parent"
-        android:layout_height="133dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <lin.shirley.videobybluetooth.FullScreenViedoView
+            android:id="@+id/myVideo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="81dp">
+        android:layout_centerVertical="true">
 
         <Button
             android:id="@+id/scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/bluetoothStatus"
+            android:layout_below="@+id/bluetoothStatus"
             android:text="on"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp"
-            android:layout_below="@+id/bluetoothStatus"
-            android:layout_alignStart="@+id/bluetoothStatus"/>
+            tools:layout_editor_absoluteY="0dp"/>
 
         <ListView
             android:id="@+id/devicesListView"
@@ -47,11 +53,11 @@
             android:id="@+id/discover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/readBuffer"
             android:text="Newdiscover"
             tools:layout_editor_absoluteX="10dp"
-            tools:layout_editor_absoluteY="281dp"
-            android:layout_below="@+id/readBuffer"
-            android:layout_alignParentEnd="true"/>
+            tools:layout_editor_absoluteY="281dp"/>
 
         <TextView
             android:id="@+id/bluetoothStatus"
@@ -70,11 +76,11 @@
             android:id="@+id/off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:text="off"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="133dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"/>
+            tools:layout_editor_absoluteY="133dp"/>
 
         <Button
             android:id="@+id/PairedBtn"
@@ -91,23 +97,23 @@
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="send"
-            android:layout_alignParentTop="true"
             android:layout_alignEnd="@+id/PairedBtn"
+            android:layout_alignParentTop="true"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="70dp"/>
+            android:layout_marginTop="70dp"
+            android:text="send"/>
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/bluetoothStatus"
+            android:layout_below="@+id/scan"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name"
             tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="121dp"
-            android:layout_below="@+id/scan"
-            android:layout_alignStart="@+id/bluetoothStatus"/>
+            tools:layout_editor_absoluteY="121dp"/>
 
         <TextView
             android:id="@+id/readBuffer"
@@ -120,6 +126,14 @@
             android:text="TextView"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp"/>
+
+        <Button
+            android:id="@+id/click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/off"
+            android:layout_toStartOf="@+id/discover"
+            android:text="click"/>
     </RelativeLayout>
 
 

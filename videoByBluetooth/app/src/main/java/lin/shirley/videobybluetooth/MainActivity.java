@@ -17,7 +17,6 @@ import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,9 +24,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,19 +70,22 @@ public class MainActivity extends AppCompatActivity {
     // used in bluetooth handler to identify message status
     private  String _recieveData = "";
 
-    private VideoView videoView;
+    private FullScreenViedoView mVideoView;
+    private RelativeLayout mRelativeLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide(); //隱藏標題
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN); //隱藏狀態
 
-        videoView = (VideoView) this.findViewById(R.id.myVideo);
+        mVideoView = (FullScreenViedoView) this.findViewById(R.id.myVideo);
+        mVideoView.setVisibility(View.GONE);
         MediaController mc = new MediaController(this);
-        videoView.setMediaController(mc);
-
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.hebe));
-
+        mVideoView.setMediaController(mc);
+        mVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.hebe));
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         //mLED1 = (CheckBox)findViewById(R.id.checkboxLED1);
         inputdata = (EditText)findViewById(R.id.editText);
         sendDevice = (Button)findViewById(R.id.send);
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.rLayout);
 
         mBTArrayAdapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_list_item_1);
@@ -103,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
         mDevicesListView = (ListView)findViewById(R.id.devicesListView);
         mDevicesListView.setAdapter(mBTArrayAdapter); // assign model to view
         mDevicesListView.setOnItemClickListener(mDeviceClickListener);
+
+        mRelativeLayout= (RelativeLayout) findViewById(R.id.layout);
 
         // 詢問藍芽裝置權限
         if(ContextCompat.checkSelfPermission(this,
@@ -127,9 +132,9 @@ public class MainActivity extends AppCompatActivity {
                     mReadBuffer.setText(_recieveData); //將收到的字串呈現在畫面上
                     mReadBuffer.setTextColor(Color.RED);
                     if(_recieveData.equals("11")){
-                        Log.e("here","yes!");
-                        videoView.requestFocus();
-                        videoView.start();
+                        mRelativeLayout.setVisibility(View.GONE);
+                        mVideoView.setVisibility(View.VISIBLE);
+                        mVideoView.start();
                     }
 
 
