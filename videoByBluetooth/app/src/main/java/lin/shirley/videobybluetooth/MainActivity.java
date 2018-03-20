@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -131,13 +133,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                     mReadBuffer.setText(_recieveData); //將收到的字串呈現在畫面上
                     mReadBuffer.setTextColor(Color.RED);
-                    if(_recieveData.equals("11")){
+                    if(_recieveData.equals("Y")){
                         mRelativeLayout.setVisibility(View.GONE);
                         mVideoView.setVisibility(View.VISIBLE);
                         mVideoView.start();
+                        Log.e("videoo","Y");
                     }
-
-
+                    mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            Log.e("videoo","end");
+                        }
+                    });
                 }
 
                 if(msg.what == CONNECTING_STATUS){
