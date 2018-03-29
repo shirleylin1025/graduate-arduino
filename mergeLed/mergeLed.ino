@@ -22,7 +22,7 @@ int ledPin9=9;
 int ledPin10=10;
 int ledPin11=11;
 int ledPin12=12;
-int ledPin13=10;
+int ledPin13=13;
 int ledPin14=A5;
 
 
@@ -79,7 +79,7 @@ void loop() {
     Serial.println(val);
     timer = millis();
     //myDFPlayer.play(3);
-    if (val > 52 && totalSound<400) {
+    if (val > 49 && totalSound<2200) {
       //Serial.println(val);
       totalSound+=val;
       Serial.print("totalSound:");
@@ -95,12 +95,12 @@ void loop() {
     
   }
   setLed(totalSound);
-  //digitalWrite(2, HIGH);
+  
 }
 
 void setLed(int total){
-  Serial.print("Total");
-  Serial.println(total);
+  //Serial.print("Total");
+  //Serial.println(total);
   if(total>50 && total<=200){
     for(int i=1; i<2; i++){
       digitalWrite(i, HIGH);
