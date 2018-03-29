@@ -7,7 +7,7 @@ DFRobotDFPlayerMini myDFPlayer;
 void printDetail(uint8_t type, int value);
 
 SoftwareSerial BT(A1, A2); // 接收腳, 傳送腳
-char val;  // 儲存接收資料的變數
+int val = 0;
 
 int totalSound=0;
 int ledPin1=1;
@@ -54,21 +54,20 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  setLed();
+  // put your main code here, to run repeatedly
   static unsigned long timer = millis();
-  byte val = Serial.read();
+  /*val = Serial.read();
   if (val== '1') {
-    myDFPlayer.play(3);
+    //myDFPlayer.play(3);
     //timer = millis();
     //myDFPlayer.next();  //Play next mp3 every 3 second.
   }
   if (val== '0') {
-    myDFPlayer.play(4);
+    //myDFPlayer.play(4);
     //timer = millis();
     //myDFPlayer.next();  //Play next mp3 every 3 second.
   }
-  
+  */
   if (myDFPlayer.available()) {
     printDetail(myDFPlayer.readType(), myDFPlayer.read()); //Print the detail message from DFPlayer to handle different errors and states.
   }
@@ -76,145 +75,152 @@ void loop() {
   BT.begin(9600);
   if (BT.available()) {
     val = BT.read();
+    Serial.print("val:");
     Serial.println(val);
     timer = millis();
     //myDFPlayer.play(3);
-    if (val > 50 && totalSound<400) {
-      Serial.println(val);
+    if (val > 52 && totalSound<400) {
+      //Serial.println(val);
       totalSound+=val;
+      Serial.print("totalSound:");
       Serial.println(totalSound);
       myDFPlayer.play(3);
+      if(totalSound>2200){
+          Serial.println("boom!!");
+          myDFPlayer.play(4);
+      }
     } else if (val == '0') {
-      digitalWrite(A3, LOW);
-      // 回應命令發送端，告知「已關燈」
       BT.println("LED OFF");
     }
-    if(totalSound>400){
-    myDFPlayer.play(4);
-    }
+    
   }
-  
+  setLed(totalSound);
+  //digitalWrite(2, HIGH);
 }
 
-void setLed(){
-  int sound=100;
-  if(totalSound>=sound && totalSound<sound+200){
-  for(int i=1; i<2; i++){
-  digitalWrite(i, HIGH);
+void setLed(int total){
+  Serial.print("Total");
+  Serial.println(total);
+  if(total>50 && total<=200){
+    for(int i=1; i<2; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=2; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.print("SetTotalSound:");
+    Serial.println(total);
   }
-  for(int i=2; i<13; i++){
-  digitalWrite(i, LOW);
+  else if(total>200 && total<=400){
+    for(int i=1; i<3; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=3; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.print("SetTotalSound2:");
+    Serial.println(total);
   }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
+  else if(total>400 && total<=600){
+   for(int i=1; i<4; i++){
+      digitalWrite(i, HIGH);
+   }
+   for(int i=4; i<13; i++){
+    digitalWrite(i, LOW);
+   }
+   digitalWrite(ledPin14, LOW);
+   Serial.println(totalSound);
   }
-  else if(totalSound>=sound+200 && totalSound<sound+400){
-  for(int i=1; i<3; i++){
-  digitalWrite(i, HIGH);
+  else if(total>600 && total<=800){
+    for(int i=1; i<5; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=5; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  for(int i=3; i<13; i++){
-  digitalWrite(i, LOW);
+  else if(total>800 && total<=1000){
+    for(int i=1; i<6; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=6; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
+  else if(total>1000 && total<=1200){
+    for(int i=1; i<7; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=7; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  else if(totalSound>=sound+400 && totalSound<sound+600){
- for(int i=1; i<4; i++){
-  digitalWrite(i, HIGH);
+  else if(total>1200 && total<=1400){
+    for(int i=1; i<8; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=8; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  for(int i=4; i<13; i++){
-  digitalWrite(i, LOW);
+  else if(total>1400 && total<=1600){
+    for(int i=1; i<9; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=9; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
+  else if(total>1600 && total<=1800){
+    for(int i=1; i<10; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=10; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  else if(totalSound>=sound+600 && totalSound<sound+800){
-  for(int i=1; i<5; i++){
-  digitalWrite(i, HIGH);
+  else if(total>1800 && total<=2000){
+    for(int i=1; i<11; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=11; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  for(int i=5; i<13; i++){
-  digitalWrite(i, LOW);
+  else if(total>2000 && total<=2200){
+    for(int i=1; i<12; i++){
+      digitalWrite(i, HIGH);
+    }
+    for(int i=12; i<13; i++){
+      digitalWrite(i, LOW);
+    }
+    digitalWrite(ledPin14, LOW);
+    Serial.println(totalSound);
   }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=sound+800 && totalSound<sound+1000){
-  for(int i=1; i<6; i++){
-  digitalWrite(i, HIGH);
-  }
-  for(int i=6; i<13; i++){
-  digitalWrite(i, LOW);
-  }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=sound+1000 && totalSound<sound+1200){
-  for(int i=1; i<7; i++){
-  digitalWrite(i, HIGH);
-  }
-  for(int i=7; i<13; i++){
-  digitalWrite(i, LOW);
-  }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=sound+1200 && totalSound<sound+1400){
-  for(int i=1; i<8; i++){
-  digitalWrite(i, HIGH);
-  }
-  for(int i=8; i<13; i++){
-  digitalWrite(i, LOW);
-  }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=sound+1400 && totalSound<sound+1600){
-  for(int i=1; i<9; i++){
-  digitalWrite(i, HIGH);
-  }
-  for(int i=9; i<13; i++){
-  digitalWrite(i, LOW);
-  }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=sound+1600 && totalSound<sound+1800){
-  for(int i=1; i<10; i++){
-  digitalWrite(i, HIGH);
-  }
-  for(int i=10; i<13; i++){
-  digitalWrite(i, LOW);
-  }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=sound+1800 && totalSound<sound+2000){
-  for(int i=1; i<11; i++){
-  digitalWrite(i, HIGH);
-  }
-  for(int i=11; i<13; i++){
-  digitalWrite(i, LOW);
-  }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=sound+2000 && totalSound<sound+2200){
-  for(int i=1; i<12; i++){
-  digitalWrite(i, HIGH);
-  }
-  for(int i=12; i<13; i++){
-  digitalWrite(i, LOW);
-  }
-  digitalWrite(ledPin14, LOW);
-  Serial.println(totalSound);
-  }
-  else if(totalSound>=2200){
-  for(int i=1; i<14; i++){
-  digitalWrite(i, HIGH);
-  }
-  digitalWrite(ledPin14, HIGH);
-  Serial.println(totalSound);
-  }
+  else if(total>2200){
+    for(int i=1; i<14; i++){
+      digitalWrite(i, HIGH);
+    }
+    digitalWrite(ledPin14, HIGH);
+    Serial.println(totalSound);
+    myDFPlayer.play(4);
+    }
   }
 void playPlayer(){
   static unsigned long timer = millis();
