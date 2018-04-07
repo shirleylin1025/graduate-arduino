@@ -8,7 +8,6 @@ void printDetail(uint8_t type, int value);
 
 SoftwareSerial BT(A1, A2); // 接收腳, 傳送腳
 int val = 0;
-
 int totalSound=0;
 int ledPin1=1;
 int ledPin2=2;
@@ -24,6 +23,7 @@ int ledPin11=11;
 int ledPin12=12;
 int ledPin13=13;
 int ledPin14=A5;
+int ledPin15=A0;
 
 
 void setup() {
@@ -31,6 +31,7 @@ void setup() {
     pinMode(i, OUTPUT);
     }
   pinMode(ledPin14, OUTPUT);
+  pinMode(ledPin15, OUTPUT);
   
   Serial.begin(9600);
   
@@ -56,41 +57,37 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly
   static unsigned long timer = millis();
-  /*val = Serial.read();
-  if (val== '1') {
-    //myDFPlayer.play(3);
-    //timer = millis();
-    //myDFPlayer.next();  //Play next mp3 every 3 second.
+
+  
+  char qq = Serial.read();
+  if (qq== '0') {
+    totalSound+=200;
+    myDFPlayer.play(1);
   }
-  if (val== '0') {
-    //myDFPlayer.play(4);
-    //timer = millis();
-    //myDFPlayer.next();  //Play next mp3 every 3 second.
-  }
-  */
+ 
   if (myDFPlayer.available()) {
     printDetail(myDFPlayer.readType(), myDFPlayer.read()); //Print the detail message from DFPlayer to handle different errors and states.
   }
   //static unsigned long timer = millis();
+
   BT.begin(9600);
   if (BT.available()) {
     val = BT.read();
     Serial.print("val:");
     Serial.println(val);
     timer = millis();
-    //myDFPlayer.play(3);
     if (val > 49 && totalSound<2200) {
       //Serial.println(val);
       totalSound+=val;
       Serial.print("totalSound:");
       Serial.println(totalSound);
-      myDFPlayer.play(3);
-      if(totalSound>2200){
-          Serial.println("boom!!");
-          myDFPlayer.play(4);
-      }
+      myDFPlayer.play(1);
     } else if (val == '0') {
       BT.println("LED OFF");
+    }
+    if(totalSound>2200){
+          myDFPlayer.play(2);
+          delay(10000);
     }
     
   }
@@ -99,6 +96,7 @@ void loop() {
 }
 
 void setLed(int total){
+  digitalWrite(ledPin2,HIGH);
   //Serial.print("Total");
   //Serial.println(total);
   if(total>50 && total<=200){
@@ -106,7 +104,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=2; i<13; i++){
-      digitalWrite(i, LOW);
+      //digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.print("SetTotalSound:");
@@ -117,7 +115,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=3; i<13; i++){
-      digitalWrite(i, LOW);
+      //digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.print("SetTotalSound2:");
@@ -128,7 +126,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
    }
    for(int i=4; i<13; i++){
-    digitalWrite(i, LOW);
+    //digitalWrite(i, LOW);
    }
    digitalWrite(ledPin14, LOW);
    Serial.println(totalSound);
@@ -138,7 +136,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=5; i<13; i++){
-      digitalWrite(i, LOW);
+      //digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
@@ -148,7 +146,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=6; i<13; i++){
-      digitalWrite(i, LOW);
+      //digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
@@ -158,7 +156,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=7; i<13; i++){
-      digitalWrite(i, LOW);
+     // digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
@@ -168,7 +166,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=8; i<13; i++){
-      digitalWrite(i, LOW);
+      //digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
@@ -178,7 +176,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=9; i<13; i++){
-      digitalWrite(i, LOW);
+     // digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
@@ -188,7 +186,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=10; i<13; i++){
-      digitalWrite(i, LOW);
+      //digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
@@ -198,7 +196,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     for(int i=11; i<13; i++){
-      digitalWrite(i, LOW);
+      //digitalWrite(i, LOW);
     }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
@@ -207,32 +205,39 @@ void setLed(int total){
     for(int i=1; i<12; i++){
       digitalWrite(i, HIGH);
     }
-    for(int i=12; i<13; i++){
-      digitalWrite(i, LOW);
-    }
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
   }
-  else if(total>2200){
+  else if(total>2200 && total<=2400){
+    for(int i=1; i<13; i++){
+      digitalWrite(i, HIGH);
+    }
+    Serial.println(totalSound);
+  }
+  else if(total>2400 && total<=2600){
     for(int i=1; i<14; i++){
       digitalWrite(i, HIGH);
     }
-    digitalWrite(ledPin14, HIGH);
+    //digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
-    myDFPlayer.play(4);
+  }
+  else if(total>2600 && total<=2800){
+    for(int i=1; i<14; i++){
+      digitalWrite(i, HIGH);
     }
+    digitalWrite(A5, HIGH);
+    Serial.println(totalSound);
   }
-void playPlayer(){
-  static unsigned long timer = millis();
-  
-  if (millis() - timer > 5000) {
-    timer = millis();
-    myDFPlayer.next();  //Play next mp3 every 3 second.
-  }
-  
-  if (myDFPlayer.available()) {
-    printDetail(myDFPlayer.readType(), myDFPlayer.read()); //Print the detail message from DFPlayer to handle different errors and states.
-  }
+  else if(total>2800){
+    for(int i=1; i<14; i++){
+      digitalWrite(i, HIGH);
+    }
+    digitalWrite(A0, HIGH);
+    digitalWrite(A5, HIGH);
+    Serial.println(totalSound);
+    myDFPlayer.play(2);
+    delay(100000);
+    }
   }
 void printDetail(uint8_t type, int value){
   switch (type) {
