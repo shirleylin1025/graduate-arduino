@@ -1,15 +1,25 @@
 
 bool LIGHT1 = false;
 bool LIGHT2 = false;
+bool RUN1=true;
+bool RUN2=true;
+bool RUN3=true;
+bool RUN4=true;
+bool RUN5=true;
+bool RUN6=true;
+bool RUN7=true;
+bool RUN8=true;
+
 int lightVal1, lightVal2, lightVal3, lightVal4, lightVal5, lightVal6;
 int val1=0, val2=0, val3=0, val4=0, val5=0, val6=0, val7=0;
 int LIGHTNUM1 = 80; //設定亮度
-int LIGHTNUM2 = 200;
+int LIGHTNUM2 = 110;
 int LIGHTNUM3 = 30;
 int LIGHTNUM4 = 20;
 int LIGHTNUM5 = 40;
 int LIGHTNUM6 = 10;
 int LIGHTNUM7 = 40;
+int sec = 500;
 const byte trigPin=10; //Output pin to trigger ultra sound
 const byte echoPin=11; //Input pin to receive echo pulse
 
@@ -68,19 +78,28 @@ void loop(){
 void opt1(){
   digitalWrite(2,HIGH);
   Serial.println("do");
-  lightVal2 = analogRead(A0);
-  Serial.print("lightVal2:");
-  Serial.println(lightVal2);
-  if(lightVal2 < LIGHTNUM2 && val2 == 0){
+  lightVal1 = analogRead(A0);
+  Serial.print("lightVal1:");
+  Serial.println(lightVal1);
+  if(lightVal1 < LIGHTNUM1 && val1 == 0){
     digitalWrite(4,LOW);
     }
-  if(lightVal2 > LIGHTNUM2 && val2 == 0){
-   val2=1;
+  if(lightVal1 > LIGHTNUM1 && val1 == 0){
+   val1=1;
    Serial.println("val=1");
   }
-  if(val2 == 1 && lightVal2<LIGHTNUM2){
+  if(val1 == 1 && lightVal1<LIGHTNUM1){
+    if(RUN1){
+      for(int i=0; i<6; i++){
+        digitalWrite(4,HIGH);
+        delay(sec);
+        digitalWrite(4,LOW);
+        delay(sec);
+        }
     digitalWrite(4,HIGH);
     Serial.println("digitalWrite(4,HIGH)");
+    }
+    RUN1=false;
   }
 
   
@@ -95,8 +114,17 @@ void opt1(){
    Serial.println("val=1");
   }
   if(val3 == 1 && lightVal3<LIGHTNUM3){
+    if(RUN3){
+      for(int i=0; i<6; i++){
+        digitalWrite(6,HIGH);
+        delay(sec);
+        digitalWrite(6,LOW);
+        delay(sec);
+        }
     digitalWrite(6,HIGH);
-    Serial.println("digitalWrite(5,HIGH)");
+    Serial.println("digitalWrite(6,HIGH)");
+    }
+    RUN3=false;
   }
 
   lightVal5 = analogRead(A4);
@@ -110,8 +138,17 @@ void opt1(){
    Serial.println("val=1");
   }
   if(val5 == 1 && lightVal5<LIGHTNUM5){
+    if(RUN5){
+      for(int i=0; i<6; i++){
+        digitalWrite(7,HIGH);
+        delay(sec);
+        digitalWrite(7,LOW);
+        delay(sec);
+        }
     digitalWrite(7,HIGH);
     Serial.println("digitalWrite(7,HIGH)");
+    }
+    RUN5=false;
   }
 
   
@@ -126,8 +163,17 @@ void opt1(){
    Serial.println("val=1");
   }
   if(val6 == 1 && lightVal6<LIGHTNUM6){
+    if(RUN6){
+      for(int i=0; i<6; i++){
+        digitalWrite(9,HIGH);
+        delay(sec);
+        digitalWrite(9,LOW);
+        delay(sec);
+        }
     digitalWrite(9,HIGH);
-    Serial.println("digitalWrite(8,HIGH)");
+    Serial.println("digitalWrite(6,HIGH)");
+    }
+    RUN6=false;
     LIGHT1=false;
   }
  
@@ -136,8 +182,7 @@ void opt1(){
  }
 
 void opt2(){
-  digitalWrite(9,HIGH);
-  
+  digitalWrite(3,HIGH);
   lightVal2 = analogRead(A1);
   Serial.print("lightVal2:");
   Serial.println(lightVal2);
@@ -149,8 +194,32 @@ void opt2(){
    Serial.println("val=1");
   }
   if(val2 == 1 && lightVal2<LIGHTNUM2){
+    if(RUN2){
     digitalWrite(5,HIGH);
+    delay(sec);
+    digitalWrite(5,LOW);
+    delay(sec);
+    digitalWrite(5,HIGH);
+    delay(sec);
+    digitalWrite(5,LOW);
+    delay(sec);
+    digitalWrite(5,HIGH);
+    delay(sec);
+    digitalWrite(5,LOW);
+    delay(sec);
+    digitalWrite(5,HIGH);
+    delay(sec);
+    digitalWrite(5,LOW);
+    delay(sec);
+    digitalWrite(5,HIGH);
+    delay(sec);
+    digitalWrite(5,LOW);
+    delay(sec);
+    digitalWrite(5,HIGH);
+    delay(sec);
     Serial.println("digitalWrite(5,HIGH)");
+    }
+    RUN2=false;
   }
 
   lightVal4 = analogRead(A3);
@@ -164,8 +233,17 @@ void opt2(){
    Serial.println("val=1");
   }
   if(val4 == 1 && lightVal4<LIGHTNUM4){
+    if(RUN4){
+      for(int i=0; i<6; i++){
+        digitalWrite(6,HIGH);
+        delay(sec);
+        digitalWrite(6,LOW);
+        delay(sec);
+        }
     digitalWrite(6,HIGH);
     Serial.println("digitalWrite(6,HIGH)");
+    }
+    RUN4=false;
   }
 
   lightVal5 = analogRead(A4);
@@ -179,8 +257,17 @@ void opt2(){
    Serial.println("val=1");
   }
   if(val5 == 1 && lightVal5<LIGHTNUM5){
+    if(RUN5){
+      for(int i=0; i<6; i++){
+        digitalWrite(8,HIGH);
+        delay(sec);
+        digitalWrite(8,LOW);
+        delay(sec);
+        }
     digitalWrite(8,HIGH);
     Serial.println("digitalWrite(8,HIGH)");
+    }
+    RUN5=false;
   }
   
   unsigned long d1=ping()/58; //calculate distance
