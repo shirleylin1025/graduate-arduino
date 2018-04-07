@@ -1,26 +1,26 @@
 #include <SoftwareSerial.h>  
-SoftwareSerial BT(11,12);    
+SoftwareSerial BT(11,12);
+int LIGHTNUM = 100;    
   
 char val;  
 String recieveData = "";   
 bool startRecieve = false;  
 
-const byte trigPin=5; //Output pin to trigger ultra sound
-const byte echoPin=6; //Input pin to receive echo pulse
 
 void setup()  
 { 
-  pinMode(trigPin, OUTPUT); //Arduino pin default input 
+  pinMode(A1, INPUT);
   Serial.begin(9600);   
   BT.begin(9600); //HC-06 預設 baud  
 }  
   
 void loop()  
 {
-  unsigned long d=ping()/58; //calculate distance
-  Serial.println(d);
-  if(d>10 && d<100){
-    Serial.println("cm");
+  int lightNum = analogRead(A1);
+  Serial.print("light:");
+  Serial.println(lightNum);
+  if(lightNum>100){
+    Serial.println("PASS");
     BT.print("Y");
   }
   
@@ -49,9 +49,3 @@ void loop()
   }  
     delay(300);  
 }  
-unsigned long ping() { //send 10us pulse to HC-SR04 trigger pin
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);  //sustain at least 10us HIGH pulse
-  digitalWrite(trigPin, LOW);
-  return pulseIn(echoPin, HIGH);
-  }

@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FullScreenViedoView mVideoView;
     private RelativeLayout mRelativeLayout;
+    private RelativeLayout mLayout;
 
 
     @Override
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         mDevicesListView.setAdapter(mBTArrayAdapter); // assign model to view
         mDevicesListView.setOnItemClickListener(mDeviceClickListener);
 
-        mRelativeLayout= (RelativeLayout) findViewById(R.id.layout);
+        mLayout= (RelativeLayout) findViewById(R.id.layout);
 
         // 詢問藍芽裝置權限
         if(ContextCompat.checkSelfPermission(this,
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     mReadBuffer.setText(_recieveData); //將收到的字串呈現在畫面上
                     mReadBuffer.setTextColor(Color.RED);
                     if(readMessage.equals("Y")){
-                        mRelativeLayout.setVisibility(View.GONE);
+                        mLayout.setVisibility(View.GONE);
                         mVideoView.setVisibility(View.VISIBLE);
                         mVideoView.start();
                         Log.e("videoo","Y");
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
-                            mRelativeLayout.setVisibility(View.VISIBLE);
+                            mLayout.setVisibility(View.VISIBLE);
                             mVideoView.setVisibility(View.GONE);
                         }
                     });
