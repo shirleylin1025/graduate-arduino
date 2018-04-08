@@ -30,8 +30,8 @@ void setup() {
   for(int i=1; i<=13 ;i++){
     pinMode(i, OUTPUT);
     }
-  pinMode(ledPin14, OUTPUT);
-  pinMode(ledPin15, OUTPUT);
+  pinMode(A5, OUTPUT);
+  pinMode(A0, OUTPUT);
   
   Serial.begin(9600);
   
@@ -61,7 +61,7 @@ void loop() {
   
   char qq = Serial.read();
   if (qq== '0') {
-    totalSound+=200;
+    totalSound+=90;
     myDFPlayer.play(1);
   }
  
@@ -76,7 +76,7 @@ void loop() {
     Serial.print("val:");
     Serial.println(val);
     timer = millis();
-    if (val > 49 && totalSound<2200) {
+    if (val > 49 && totalSound<3200) {
       //Serial.println(val);
       totalSound+=val;
       Serial.print("totalSound:");
@@ -236,7 +236,7 @@ void setLed(int total){
       digitalWrite(i, HIGH);
     }
     digitalWrite(A5, HIGH);
-    digitalWrite(ledPin15, LOW);
+    digitalWrite(A0, LOW);
     Serial.println(totalSound);
   }
   else if(total>2800){

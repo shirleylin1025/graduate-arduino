@@ -22,8 +22,6 @@ void setup() {
   pinMode(smallLedPin3, OUTPUT);
   pinMode(smallLedPin4, OUTPUT);
   
-
-    
   // 藍牙透傳模式的預設連線速率。
   BT.begin(9600);
 }
@@ -77,7 +75,7 @@ void loop() {
     soundValue = analogRead(soundPin);
     //Serial.print("val:");
     //Serial.println(val);
-    if(soundValue>87 && storeLed == true){
+    if(soundValue>92 && storeLed == true){
     Serial.println(soundValue);
     BT.print(soundValue);
     }
