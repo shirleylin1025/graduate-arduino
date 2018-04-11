@@ -17,7 +17,7 @@ int LIGHTNUM2 = 110;
 int LIGHTNUM3 = 30;
 int LIGHTNUM4 = 20;
 int LIGHTNUM5 = 40;
-int LIGHTNUM6 = 10;
+int LIGHTNUM6 = 20;
 int LIGHTNUM7 = 40;
 int sec = 500;
 const byte trigPin=10; //Output pin to trigger ultra sound
@@ -28,6 +28,8 @@ void setup(){
   for(int i=2 ; i<10 ;i++){
     pinMode(i,OUTPUT);
   }
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
   pinMode(12, INPUT);
   pinMode(13, INPUT);
   pinMode(A0, INPUT);
@@ -286,10 +288,17 @@ void opt2(){
     delay(500);
     }
   if(d1 < 8 && val7 == 1 ){
-    Serial.print("d14:");
-    Serial.println(d1);
+    if(RUN7){
+      for(int i=0; i<6; i++){
+        digitalWrite(9,HIGH);
+        delay(sec);
+        digitalWrite(9,LOW);
+        delay(sec);
+        }
     digitalWrite(9,HIGH);
-    Serial.println("digitalWrite(9,HIGH)");
+    Serial.println("digitalWrite(6,HIGH)");
+    }
+    RUN7=false;
   }
   delay(500);
   
