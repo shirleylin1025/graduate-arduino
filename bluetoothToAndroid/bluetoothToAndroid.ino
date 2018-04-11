@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>  
 SoftwareSerial BT(11,12);
-int LIGHTNUM = 100;    
+int LIGHTVAL = 200;    
   
 char val;  
 String recieveData = "";   
@@ -19,7 +19,7 @@ void loop()
   int lightNum = analogRead(A1);
   Serial.print("light:");
   Serial.println(lightNum);
-  if(lightNum>100){
+  if(lightNum>LIGHTVAL){
     Serial.println("PASS");
     BT.print("Y");
   }
