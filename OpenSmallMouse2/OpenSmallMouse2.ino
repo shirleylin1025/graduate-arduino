@@ -4,7 +4,7 @@
 SoftwareSerial mySoftwareSerial(7, 8); // RX, TX
 DFRobotDFPlayerMini myDFPlayer;
 
-int LIGHTNUM2 = 50;
+int LIGHTNUM2 = 110;
 
 //void printDetail(uint8_t type, int value);
 
@@ -45,7 +45,7 @@ void loop() {
     myDFPlayer.volume(30);
     myDFPlayer.play(1);
     play = false;
-    delay(6000);
+    delay(12000);
    }
    else{
     myDFPlayer.stop();
