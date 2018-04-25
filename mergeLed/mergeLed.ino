@@ -95,7 +95,7 @@ void setLed(int total){
   digitalWrite(ledPin2,HIGH);
   //Serial.print("Total");
   //Serial.println(total);
-  if(total>50 && total<=200){
+  if(total>50 && total<=100){
     for(int i=3; i<14; i++){
       digitalWrite(i, LOW);
     }
@@ -104,7 +104,7 @@ void setLed(int total){
     Serial.print("SetTotalSound:");
     Serial.println(total);
   }
-  else if(total>200 && total<=400){
+  else if(total>100 && total<=150){
     for(int i=1; i<3; i++){
       digitalWrite(i, HIGH);
     }
@@ -116,7 +116,7 @@ void setLed(int total){
     Serial.print("SetTotalSound2:");
     Serial.println(total);
   }
-  else if(total>400 && total<=600){
+  else if(total>150 && total<=200){
    for(int i=1; i<4; i++){
       digitalWrite(i, HIGH);
    }
@@ -126,7 +126,7 @@ void setLed(int total){
    digitalWrite(ledPin14, LOW);
    Serial.println(totalSound);
   }
-  else if(total>600 && total<=800){
+  else if(total>200 && total<=250){
     for(int i=1; i<5; i++){
       digitalWrite(i, HIGH);
     }
@@ -137,7 +137,7 @@ void setLed(int total){
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
   }
-  else if(total>800 && total<=1000){
+  else if(total>250 && total<=300){
     for(int i=1; i<6; i++){
       digitalWrite(i, HIGH);
     }
@@ -148,7 +148,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>1000 && total<=1200){
+  else if(total>300 && total<=350){
     for(int i=1; i<7; i++){
       digitalWrite(i, HIGH);
     }
@@ -159,7 +159,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>1200 && total<=1400){
+  else if(total>350 && total<=400){
     for(int i=1; i<8; i++){
       digitalWrite(i, HIGH);
     }
@@ -170,7 +170,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>1400 && total<=1600){
+  else if(total>400 && total<=450){
     for(int i=1; i<9; i++){
       digitalWrite(i, HIGH);
     }
@@ -181,7 +181,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>1600 && total<=1800){
+  else if(total>450 && total<=500){
     for(int i=1; i<10; i++){
       digitalWrite(i, HIGH);
     }
@@ -192,7 +192,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>1800 && total<=2000){
+  else if(total>400 && total<=550){
     for(int i=1; i<11; i++){
       digitalWrite(i, HIGH);
     }
@@ -203,7 +203,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>2000 && total<=2200){
+  else if(total>550 && total<=600){
     for(int i=1; i<12; i++){
       digitalWrite(i, HIGH);
     }
@@ -214,7 +214,7 @@ void setLed(int total){
     digitalWrite(ledPin14, LOW);
     Serial.println(totalSound);
   }
-  else if(total>2200 && total<=2400){
+  else if(total>600 && total<=650){
     for(int i=1; i<13; i++){
       digitalWrite(i, HIGH);
     }
@@ -225,7 +225,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>2400 && total<=2600){
+  else if(total>650 && total<=800){
     for(int i=1; i<14; i++){
       digitalWrite(i, HIGH);
     }
@@ -233,7 +233,7 @@ void setLed(int total){
     digitalWrite(ledPin15, LOW);
     Serial.println(totalSound);
   }
-  else if(total>2600 && total<=2800){
+  else if(total>800 && total<=1000){
     for(int i=1; i<14; i++){
       digitalWrite(i, HIGH);
     }
@@ -241,7 +241,7 @@ void setLed(int total){
     digitalWrite(A0, LOW);
     Serial.println(totalSound);
   }
-  else if(total>2800){
+  else if(total>1000){
     for(int i=1; i<14; i++){
       digitalWrite(i, HIGH);
     }
