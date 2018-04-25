@@ -133,7 +133,7 @@ void opt1(){
   Serial.print("lightVal5:");
   Serial.println(lightVal5);
   if(lightVal5 < LIGHTNUM5 && val5 == 0){
-    digitalWrite(7,LOW);
+    digitalWrite(8,LOW);
     }
   if(lightVal5 > LIGHTNUM5 && val5 == 0){
    val5=1;
@@ -142,30 +142,34 @@ void opt1(){
   if(val5 == 1 && lightVal5<LIGHTNUM5){
     if(RUN5){
       for(int i=0; i<6; i++){
-        digitalWrite(7,HIGH);
+        digitalWrite(8,HIGH);
         delay(sec);
-        digitalWrite(7,LOW);
+        digitalWrite(8,LOW);
         delay(sec);
         }
-    digitalWrite(7,HIGH);
-    Serial.println("digitalWrite(7,HIGH)");
+    digitalWrite(8,HIGH);
+    Serial.println("digitalWrite(8,HIGH)");
     }
     RUN5=false;
   }
-
   
- lightVal6 = analogRead(A5);
-  Serial.print("lightVal6:");
-  Serial.println(lightVal6);
-  if(lightVal6 < LIGHTNUM6 && val6 == 0){
+ unsigned long d1=ping()/58; //calculate distance
+  Serial.print("d1:");
+  Serial.println(d1);
+  if(d1 < 8 || d1>100 && val7==0){
     digitalWrite(9,LOW);
-    }
-  if(lightVal6 > LIGHTNUM6 && val6 == 0){
-   val6=1;
-   Serial.println("val=1");
+    Serial.print("d12:");
+    Serial.println(d1);
   }
-  if(val6 == 1 && lightVal6<LIGHTNUM6){
-    if(RUN6){
+  if(d1 > 8 && val7==0 && d1<100 && d1!=0){
+    val7 = 1;
+    Serial.println("val=1");
+    Serial.print("d13:");
+    Serial.println(d1);
+    delay(500);
+    }
+  if(d1 < 8 && val7 == 1 ){
+    if(RUN7){
       for(int i=0; i<6; i++){
         digitalWrite(9,HIGH);
         delay(sec);
@@ -173,12 +177,11 @@ void opt1(){
         delay(sec);
         }
     digitalWrite(9,HIGH);
-    Serial.println("digitalWrite(6,HIGH)");
+    Serial.println("digitalWrite(9,HIGH)");
     }
-    RUN6=false;
-    LIGHT1=false;
+    RUN7=false;
   }
- 
+    LIGHT1=false;
   delay(500);
   
  }
@@ -252,7 +255,7 @@ void opt2(){
   Serial.print("lightVal5:");
   Serial.println(lightVal5);
   if(lightVal5 < LIGHTNUM5 && val5 == 0){
-    digitalWrite(8,LOW);
+    digitalWrite(7,LOW);
     }
   if(lightVal5 > LIGHTNUM5 && val5 == 0){
    val5=1;
@@ -261,34 +264,29 @@ void opt2(){
   if(val5 == 1 && lightVal5<LIGHTNUM5){
     if(RUN5){
       for(int i=0; i<6; i++){
-        digitalWrite(8,HIGH);
+        digitalWrite(7,HIGH);
         delay(sec);
-        digitalWrite(8,LOW);
+        digitalWrite(7,LOW);
         delay(sec);
         }
-    digitalWrite(8,HIGH);
-    Serial.println("digitalWrite(8,HIGH)");
+    digitalWrite(7,HIGH);
+    Serial.println("digitalWrite(7,HIGH)");
     }
     RUN5=false;
   }
-  
-  unsigned long d1=ping()/58; //calculate distance
-  Serial.print("d1:");
-  Serial.println(d1);
-  if(d1 < 8 || d1>100 && val7==0){
+
+  lightVal6 = analogRead(A5);
+  Serial.print("lightVal6:");
+  Serial.println(lightVal6);
+  if(lightVal6 < LIGHTNUM6 && val6 == 0){
     digitalWrite(9,LOW);
-    Serial.print("d12:");
-    Serial.println(d1);
-  }
-  if(d1 > 8 && val7==0 && d1<100 && d1!=0){
-    val7 = 1;
-    Serial.println("val=1");
-    Serial.print("d13:");
-    Serial.println(d1);
-    delay(500);
     }
-  if(d1 < 8 && val7 == 1 ){
-    if(RUN7){
+  if(lightVal6 > LIGHTNUM6 && val6 == 0){
+   val6=1;
+   Serial.println("val=1");
+  }
+  if(val6 == 1 && lightVal6<LIGHTNUM6){
+    if(RUN6){
       for(int i=0; i<6; i++){
         digitalWrite(9,HIGH);
         delay(sec);
@@ -298,10 +296,8 @@ void opt2(){
     digitalWrite(9,HIGH);
     Serial.println("digitalWrite(6,HIGH)");
     }
-    RUN7=false;
+    RUN6=false;
   }
   delay(500);
-  
-  }
-
+}
 
