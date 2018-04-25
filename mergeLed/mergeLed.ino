@@ -8,7 +8,7 @@ void printDetail(uint8_t type, int value);
 
 SoftwareSerial BT(A1, A2); // 接收腳, 傳送腳
 int val = 0;
-int totalSound=0;
+int totalSound = 0;
 int ledPin1=1;
 int ledPin2=2;
 int ledPin3=3;
@@ -24,6 +24,8 @@ int ledPin12=12;
 int ledPin13=13;
 int ledPin14=A5;
 int ledPin15=A0;
+int shineSec=50;
+int shineSec2=100;
 
 
 void setup() {
@@ -58,7 +60,7 @@ void loop() {
   // put your main code here, to run repeatedly
   static unsigned long timer = millis();
 
-  
+ 
   char qq = Serial.read();
   if (qq== '0') {
     totalSound+=90;
@@ -247,8 +249,67 @@ void setLed(int total){
     digitalWrite(A5, HIGH);
     Serial.println(totalSound);
     myDFPlayer.play(2);
-    delay(10000);
+    delay(1000);
+    for(int i=0; i<3; i++){
+      shineLED();
     }
+    totalSound = 60;
+    Serial.print("totalSound = ");
+    Serial.println(totalSound);
+    }
+  }
+
+void shineLED(){
+  digitalWrite(A5, LOW);
+    delay(shineSec);
+    digitalWrite(A0, LOW);
+    delay(shineSec);
+    for(int i=13; i>0; i--){
+      digitalWrite(i, LOW);
+      delay(shineSec);
+    }
+    for(int i=1; i<14; i++){
+      digitalWrite(i, HIGH);
+      delay(shineSec);
+    }
+    digitalWrite(A0, HIGH);
+    delay(shineSec);
+    digitalWrite(A5, HIGH);
+    delay(shineSec);
+    digitalWrite(A5, LOW);
+    delay(shineSec);
+    digitalWrite(A0, LOW);
+    delay(shineSec);
+    for(int i=13; i>0; i--){
+      digitalWrite(i, LOW);
+      delay(shineSec);
+    }
+    for(int i=1; i<14; i++){
+      digitalWrite(i, HIGH);
+      delay(shineSec);
+    }
+    digitalWrite(A0, HIGH);
+    delay(shineSec);
+    digitalWrite(A5, HIGH);
+    delay(shineSec);
+
+    
+    for(int i=0 ; i<4; i++){
+      digitalWrite(A0, LOW);
+      digitalWrite(A5, LOW);
+      for(int i=1; i<14; i++){
+        digitalWrite(i, LOW);
+      }
+      delay(shineSec2);
+      digitalWrite(A0, HIGH);
+      digitalWrite(A5, HIGH);
+      for(int i=1; i<14; i++){
+        digitalWrite(i, HIGH);
+      }
+      delay(shineSec2);
+    }
+  
+  
   }
 void printDetail(uint8_t type, int value){
   switch (type) {
