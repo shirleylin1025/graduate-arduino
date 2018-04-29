@@ -14,10 +14,10 @@ bool RUN8=true;
 
 int lightVal1, lightVal2, lightVal3, lightVal4, lightVal5, lightVal6;
 int val1=0, val2=0, val3=0, val4=0, val5=0, val6=0, val7=0;
-int LIGHTNUM1 = 80; //設定亮度
-int LIGHTNUM2 = 90;
+int LIGHTNUM1 = 113; //設定亮度
+int LIGHTNUM2 = 200;
 int LIGHTNUM3 = 30;
-int LIGHTNUM4 = 30;
+int LIGHTNUM4 = 70;
 int LIGHTNUM5 = 40;
 int LIGHTNUM6 = 20;
 int LIGHTNUM7 = 40;
@@ -82,27 +82,27 @@ void loop(){
   }
 
 void opt1(){
-  digitalWrite(2,HIGH);
+  digitalWrite(3,HIGH);
   Serial.println("do");
-  lightVal1 = analogRead(A0);
-  Serial.print("lightVal1:");
-  Serial.println(lightVal1);
-  if(lightVal1 < LIGHTNUM1 && val1 == 0){
+  lightVal2 = analogRead(A1);
+  Serial.print("lightVal2:");
+  Serial.println(lightVal2);
+  if(lightVal2 < LIGHTNUM2 && val2 == 0){
     digitalWrite(4,LOW);
     }
-  if(lightVal1 > LIGHTNUM1 && val1 == 0){
-   val1=1;
+  if(lightVal2 > LIGHTNUM2 && val2 == 0){
+   val2=1;
    Serial.println("val=1");
   }
-  if(val1 == 1 && lightVal1<LIGHTNUM1){
-    if(RUN1){
+  if(val2 == 1 && lightVal2<LIGHTNUM2){
+    if(RUN2){
       for(int i=0; i<6; i++){
         digitalWrite(4,HIGH);
         delay(sec);
         digitalWrite(4,LOW);
         delay(sec);
         if(i=5){
-          RUN1 = false;
+          RUN2 = false;
           }
         delayOpt1 += 1;
         }
