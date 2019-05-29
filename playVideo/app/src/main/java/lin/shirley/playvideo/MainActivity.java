@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -30,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
         mVideoView.requestFocus();
         mc.setVisibility(View.INVISIBLE);
         mVideoView.setMediaController(mc);
-        mVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.one));
+        mVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.vids));
         mImageButton.setImageResource(R.drawable.logo);
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mVideoView.setVisibility(View.VISIBLE);
                 mVideoView.start();
                 mImageButton.setVisibility(View.INVISIBLE);
                 mImageView.setVisibility(View.INVISIBLE);
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mediaPlayer) {
                 mImageButton.setVisibility(View.VISIBLE);
                 mImageView.setVisibility(View.VISIBLE);
+                mVideoView.setVisibility(View.INVISIBLE);
+                Log.e("here", "end");
             }
         });
 

@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         mVideoView.setVisibility(View.GONE);
         MediaController mc = new MediaController(this);
         mVideoView.setMediaController(mc);
-        mVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video0325));
+        mVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main));
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);

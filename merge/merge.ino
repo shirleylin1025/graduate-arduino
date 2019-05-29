@@ -75,7 +75,7 @@ void loop() {
     soundValue = analogRead(soundPin);
     //Serial.print("val:");
     //Serial.println(val);
-    if(soundValue>92 && storeLed == true){
+    if(soundValue>100 && storeLed == true){
     Serial.println(soundValue);
     BT.print(soundValue);
     }

@@ -15,15 +15,15 @@ bool RUN8=true;
 int lightVal1, lightVal2, lightVal3, lightVal4, lightVal5, lightVal6;
 int val1=0, val2=0, val3=0, val4=0, val5=0, val6=0, val7=0;
 int LIGHTNUM1 = 113; //設定亮度
-int LIGHTNUM2 = 200;
+int LIGHTNUM2 = 110;
 int LIGHTNUM3 = 30;
-int LIGHTNUM4 = 70;
-int LIGHTNUM5 = 40;
+int LIGHTNUM4 = 40;
+int LIGHTNUM5 = 100;
 int LIGHTNUM6 = 20;
 int LIGHTNUM7 = 40;
 int sec = 500;
-int delaySecOpt1 = 6000;
-int delaySecOpt2 = 6000;
+int delaySecOpt1 = 20000;
+int delaySecOpt2 = 20000;
 const byte trigPin=10; //Output pin to trigger ultra sound
 const byte echoPin=11; //Input pin to receive echo pulse
 
@@ -49,6 +49,7 @@ void setup(){
 int pr_min = 400;
 
 void loop(){
+  //digitalWrite(7,HIGH);
   int switchStatus1 = digitalRead(12);
   //Serial.print("switchStatus1:");
   //Serial.println(switchStatus1);
@@ -163,7 +164,7 @@ void opt1(){
     Serial.println("9,Opne");
     delay(500);
     }
-  if(d1 < 8 && val7 == 1 ){
+  if(d1 < 9 && val7 == 1 ){
     if(RUN7){
       for(int i=0; i<6; i++){
         digitalWrite(9,HIGH);

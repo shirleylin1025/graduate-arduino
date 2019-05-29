@@ -4,7 +4,7 @@
 SoftwareSerial mySoftwareSerial(7, 8); // RX, TX
 DFRobotDFPlayerMini myDFPlayer;
 
-int LIGHTNUM2 = 110;
+int LIGHTNUM2 = 15 ;
 
 //void printDetail(uint8_t type, int value);
 
@@ -13,6 +13,7 @@ int LIGHTNUM2 = 110;
 bool play=false;
 
 void setup() {
+  
   pinMode(A1, INPUT);
   Serial.begin(9600);
   

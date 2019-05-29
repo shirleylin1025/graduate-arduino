@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>  
 SoftwareSerial BT(11,12);
-int LIGHTVAL = 200;    
+int LIGHTVAL = 160;    
   
 char val;  
 String recieveData = "";   
@@ -23,9 +23,6 @@ void loop()
     Serial.println("PASS");
     BT.print("Y");
   }
-  
-  delay(1000);  
-
   if (Serial.available()) {
     val = Serial.read();
     BT.print(val);
