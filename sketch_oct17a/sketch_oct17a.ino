@@ -10,13 +10,22 @@ void setup()
 
 void loop() 
 {
-  for(int i = 0; i <= 180; i+=1){
-    myservo.write(i); // 使用write，傳入角度，從0度轉到180度
-    Serial.println(i);
-  }
-  for(int i = 180; i >= 0; i-=1){
-    myservo.write(i);// 使用write，傳入角度，從180度轉到0度
-    Serial.println(i);
+  if (Serial.available() > 0) {
+    int inByte = Serial.read();
+    switch (inByte) {
+      case '1':
+        myservo.write(70);
+        delay(1000);          // Wait 1 second
+        break;
+      case '2':
+        myservo.write(150);
+        delay(1000);          // Wait 1 second
+        break;
+      case '3':
+        myservo.write(100);
+        delay(1000);          // Wait 1 second
+        break;
+    }
   }
 }
 
